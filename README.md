@@ -57,6 +57,8 @@ Unique Aspect: Focus on usability and solving a practical problem, which many re
 	Hover Effects: Subtle hover effects on buttons and input fields.
 	Loading Indicators: Show loading spinners or progress bars when fetching time zone data or syncing with Google Calendar.
 
+Here are some samples how ot looks:
+
 ![Screenshot (66)](https://github.com/user-attachments/assets/1851874e-8046-441b-8c9c-b71923fae400)
 ![Screenshot (67)](https://github.com/user-attachments/assets/167e20ca-6704-4e23-9db8-ec9e9bbd8d05)
 
