@@ -1,0 +1,116 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    height: 100vh; 
+    
+    flex-direction: row; 
+}
+
+.left-half {
+    
+    flex: 3; /* Left half of the page */
+    padding: 20px;
+    background-color: #f7f7f7;
+    box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+textarea.input-field {
+    height: 80px;
+    resize: none;
+}
+
+.button {
+    padding: 10px 15px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-top: 15px;
+}
+
+.button:hover {
+    background-color: #2980b9;
+}
+
+.meeting-suggestions {
+    margin-top: 20px;
+}
+
+#meeting-list {
+    list-style-type: none;
+}
+
+#meeting-list li {
+    padding: 10px;
+    background-color: #eaf1f8;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+
+/* --------------right half------------------------- */
+
+
+.embedded-content {
+    flex: 2; /* Takes the remaining 50% */
+    background-color: #fff;
+    padding: 10px; /* Add padding around the iframe */
+    box-sizing: border-box; /* Include padding in the element's total width and height */
+}
+
+.embedded-content iframe {
+    width: calc(100% - 20px); /* Adjust width to account for padding (10px on each side) */
+    height: calc(100% - 20px); /* Adjust height to account for padding (10px on top and bottom) */
+    border: none;
+    margin: 10px; /* Optional: add margin around the iframe */
+}
+
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; 
+        height: auto; 
+    }
+
+    .left-half, .embedded-content {
+        flex: none; 
+        width: 100%; 
+        height: auto; 
+    }
+
+    .embedded-content iframe {
+        height: 100vh; 
+    }
+};
