@@ -40,16 +40,44 @@ $command = "python process_timings.py";
 // Execute the command and capture the output
 exec($command, $output, $resultCode);
 
-// Check if the execution was successful
-if ($resultCode === 0) {
-    // Join the output array into a single string (it should be JSON)
-    $outputString = implode("\n", $output);
+// Convert the output to a single JSON string if it's an array
+$pythonOutput = implode("\n", $output);
+
+// Decode the output if it's JSON formatted
+$pythonData = json_decode($pythonOutput, true);
+
+$dataFile = 'data.json';
+$existingData = [];
+
+// Read the existing data from the file
+if (file_exists($dataFile)) {
+    $existingContent = file_get_contents($dataFile);
+    $existingData = json_decode($existingContent, true); // Decode existing JSON content
+}
+
+if ($resultCode === 0 && $pythonData !== null) {
+    // Merge optimal_times
+    if (isset($pythonData['optimal_times'])) {
+        if (!isset($existingData['optimal_times'])) {
+            $existingData['optimal_times'] = [];
+        }
+        $existingData['optimal_times'] = array_merge($existingData['optimal_times'], $pythonData['optimal_times']);
+    }
+
+    // Update data.json file
+    file_put_contents($dataFile, json_encode($existingData, JSON_PRETTY_PRINT));
+
+    // Prepare response data
+    $response = [
+        'optimal_times' => $existingData['optimal_times'],
+        'plot_data' => $pythonData['plot_data'] // Ensure this is properly formatted in the Python script
+    ];
 
     // Set the content type to JSON
     header('Content-Type: application/json');
 
-    // Echo the output string (which should be valid JSON)
-    echo $outputString;
+    // Output the response
+    echo json_encode($response);
 } else {
     // Handle error case
     http_response_code(500);
